@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -29,7 +31,7 @@ class MainActivity : ComponentActivity() {
             MyLayoutInJetpackComposeTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    PhotographerCard()
+                    LayoutsCodelab()
                 }
             }
         }
@@ -37,36 +39,26 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun LayoutsCodelab() {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(text = "LayoutsCodelab") },
+                actions = { IconButton(onClick = { /*TODO*/ }) {
+                    Icon(Icons.Filled.Favorite, contentDescription = null)
+                } }
+            )
+        }
+    ) { innerPadding ->
+        BodyContents(modifier = Modifier.padding(innerPadding))
+    }
 }
 
 @Composable
-fun PhotographerCard(modifier: Modifier = Modifier) {
-    Row(
-        modifier = modifier
-            .padding(8.dp)
-            .clip(RoundedCornerShape(4.dp))
-            .background(MaterialTheme.colors.surface)
-            .clickable(onClick = {})
-            .padding(16.dp)
-    ) {
-        Surface(
-            modifier = Modifier.size(50.dp),
-            shape = CircleShape,
-            color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f)
-        ) {
-
-        }
-        
-        Column(
-            modifier = Modifier.padding(start = 8.dp).align(Alignment.CenterVertically)
-        ) {
-            Text("Alfred Sisley", fontWeight = FontWeight.Bold)
-            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                Text("3 minutes ago", style = MaterialTheme.typography.body2)
-            }
-        }
+fun BodyContents(modifier: Modifier) {
+    Column(modifier = modifier.padding(8.dp)) {
+        Text("Hi there!")
+        Text(text = "Thanks for going through the Layouts codelab")
     }
 }
 
@@ -74,6 +66,6 @@ fun PhotographerCard(modifier: Modifier = Modifier) {
 @Composable
 fun DefaultPreview() {
     MyLayoutInJetpackComposeTheme {
-        PhotographerCard()
+        LayoutsCodelab()
     }
 }
